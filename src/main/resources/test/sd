@@ -1,0 +1,40 @@
+create external table if not exists testlog
+(ver string,
+s_time string,
+en string,
+u_ud string,
+u_mid string,
+u_sd string,
+c_time string,
+l string,
+b_iev string,
+b_rst string,
+p_url string,
+p_ref string,
+tt string,
+pl string,
+ip string,
+oid string,
+on_1 string,
+cua string,
+cut string,
+pt string,
+ca string,
+ac string,
+kv_ string,
+du string,
+browserName string,
+browserVersion string,
+osName string,
+osVersion string,
+country string,
+province string,
+city string)
+row format delimited fields
+terminated by '\001' stored as textfile
+location '/logs/part-m-00000';
+load data inpath 'hdfs://myspark:9000/log/part-m-00000' overwrite into table testlog;
+
+
+alter table testlog set serdeproperties('field.delim'='\001');
+
